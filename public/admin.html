@@ -124,6 +124,7 @@
 <body>
   <div class="container">
     <h1>Panel Admin</h1>
+    <button id="exportMenusBtn" style="margin-bottom:1.5rem;float:right;background:#2E2E2E;">Exporter menus.json</button>
     <div id="toast" style="position:fixed;right:2rem;bottom:2rem;z-index:1000;min-width:200px;max-width:350px;padding:1rem 1.5rem;border-radius:0.5rem;background:#2e7d32;color:#fff;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,0.15);display:none;align-items:center;gap:0.5rem;"></div>
     <form id="menusForm">
       <div class="menu-section" data-section="midi">
@@ -383,6 +384,31 @@
         showToast('Erreur lors de la sauvegarde.', false);
       } else {
         showToast('Modifications enregistrées !', true);
+      }
+    });
+
+    // Bouton export menus.json
+    document.addEventListener('DOMContentLoaded', () => {
+      const exportBtn = document.getElementById('exportMenusBtn');
+      if(exportBtn) {
+        exportBtn.addEventListener('click', async () => {
+          try {
+            const res = await fetch('/api/menus');
+            if(!res.ok) throw new Error('Erreur API');
+            const data = await res.json();
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'menus.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          } catch {
+            alert('Erreur lors de l\'export.');
+          }
+        });
       }
     });
 
