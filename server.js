@@ -30,8 +30,8 @@ app.get('/api/menus', async (req, res) => {
 // Route pour mettre à jour une section de menu
 app.put('/api/menus/:section', async (req, res) => {
   const section = req.params.section;
-  if (section === 'vin') {
-    db.data.vin = req.body.vin || '';
+  if (section === 'vin_moment') {
+    db.data.vin_moment = req.body.vin_moment || '';
     await db.write();
     return res.sendStatus(204);
   }

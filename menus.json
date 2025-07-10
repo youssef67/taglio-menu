@@ -1,35 +1,51 @@
 {
   "midi": [
     {
-      "label": "Formule Entrée + Plat + Dessert",
+      "label": "Formule Entrée + Plat + Dessert ff",
       "prix": 25
     },
     {
-      "label": "Plat seul sans amis",
+      "label": "Plat seul sans amisksk",
       "prix": 18
     }
   ],
   "boissons": {
     "bieres": [
-      { "label": "Heineken", "prix": 5 },
-      { "label": "Leffe", "prix": 6 }
+      {
+        "label": "Heinekendd",
+        "prix": 51,
+        "description": "Bière blonde légère"
+      },
+      {
+        "label": "Leffe",
+        "prix": 6,
+        "description": "Bière d'abbaye ambrée"
+      }
     ],
     "softs": [
-      { "label": "Eau plate", "prix": 3 },
-      { "label": "Soda", "prix": 4 }
+      {
+        "label": "Eau plate",
+        "prix": 3,
+        "description": ""
+      },
+      {
+        "label": "Soda",
+        "prix": 4,
+        "description": "Boisson gazeuse sucrée"
+      }
     ]
   },
   "cocktails": [
     {
       "label": "Mojito",
-      "prix": 9,
+      "prix": 97,
       "description": "Rhum, menthe, citron vert, sucre, eau gazeuse"
     },
     {
       "label": "Cosmopolitan",
-      "prix": 11,
+      "prix": 111,
       "description": "Vodka, triple sec, cranberry, citron vert"
     }
   ],
-  "vin_moment": "Découvrez nos vins du moment de la sélection Marmi."
+  "vin_moment": "Découvrez nos vins du moment de la sélection Marmi"
 }
