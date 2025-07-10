@@ -12,51 +12,161 @@
   "boissons": {
     "bieres": [
       {
-        "label": "Heinekendd",
-        "prix": 51,
-        "description": "Bière blonde légère"
+        "label": "Brulo",
+        "prix": 4.9,
+        "description": "description à mettre"
       },
       {
-        "label": "Leffe",
-        "prix": 6,
-        "description": "Bière d'abbaye ambrée"
+        "label": "Cynar 25cl",
+        "prix": 4.5,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Cynar 50cl",
+        "prix": 9,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Kolla 25cl",
+        "prix": 4,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Kolla 50cl",
+        "prix": 7.8,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Ombre 25cl",
+        "prix": 4.5,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Ombre 50cl",
+        "prix": 8.5,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Rothaus",
+        "prix": 4.5,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Helles 25cl",
+        "prix": 3.5,
+        "description": "description à mettre"
+      },
+      {
+        "label": "Helles 50cl",
+        "prix": 6.9,
+        "description": "description à mettre"
       }
     ],
     "softs": [
       {
-        "label": "Eau plate",
+        "label": "Gugini Caruso",
+        "prix": 4.5,
+        "description": ""
+      },
+      {
+        "label": "Ice Tea Sauter",
+        "prix": 3.8,
+        "description": ""
+      },
+      {
+        "label": "Carola Bleu",
         "prix": 3,
         "description": ""
       },
       {
-        "label": "Soda",
+        "label": "Carola verte / rouge",
+        "prix": 3.2,
+        "description": ""
+      },
+      {
+        "label": "Polara",
         "prix": 4,
-        "description": "Boisson gazeuse sucrée"
+        "description": ""
+      },
+      {
+        "label": "Portofino",
+        "prix": 5,
+        "description": ""
+      },
+      {
+        "label": "Ice Tea Maison",
+        "prix": 4,
+        "description": ""
+      },
+      {
+        "label": "Club mate",
+        "prix": 4.6,
+        "description": ""
       }
     ]
   },
   "cocktails": {
     "cocktails": [
       {
-        "label": "Mojito",
+        "label": "Spritz",
         "prix": 9,
-        "description": "Rhum, menthe, citron vert, sucre, eau gazeuse"
+        "description": "Spritz / Prosecco / Eau gazeuse"
       },
       {
-        "label": "Cosmopolitan",
-        "prix": 11,
-        "description": "Vodka, triple sec, cranberry, citron vert"
+        "label": "Campari Spritz",
+        "prix": 9,
+        "description": "Campari / Prosecco / Eau gazeuse"
+      },
+      {
+        "label": "Limoncello Spritz",
+        "prix": 9,
+        "description": "Limoncello / Prosecco / Eau gazeuse"
+      },
+      {
+        "label": "Pink Spritz",
+        "prix": 9,
+        "description": "Sarti / Prosecco / Eau gazeuse"
+      },
+      {
+        "label": "Hugo Spritz",
+        "prix": 9,
+        "description": "Liqueur de sureau / Prosecco / Eau gazeuse"
+      },
+      {
+        "label": "Birra Spritz",
+        "prix": 6,
+        "description": "Spritz / Bière / Eau gazeuse"
+      },
+      {
+        "label": "Negroni",
+        "prix": 9,
+        "description": "Campari / Gin / Vermouth"
+      },
+      {
+        "label": "Amaretto Sour",
+        "prix": 9,
+        "description": "Amaretto Blanc / Citron"
+      },
+      {
+        "label": "Albicocca Smash",
+        "prix": 9,
+        "description": "Gin / Basilic / Liqueur d'abricot / citron"
+      },
+      {
+        "label": "Piselli e Gragola",
+        "prix": 9,
+        "description": "Sirop fraises fraîches / vodka petits pois"
       }
     ],
     "mocktails": [
       {
-        "label": "Virgin Mojito",
+        "label": "Pépé Basilico",
         "prix": 7,
-        "description": "Menthe, citron vert, sucre, eau gazeuse"
+        "description": "Sirop de basilic / citron / Spuma"
       },
       {
-        "label": "Shirley Temple",
-        "prix": 6,
+        "label": "Spritz sans alcool",
+        "prix": 7,
         "description": "Gingembre, grenadine, citron, limonade"
       }
     ]
