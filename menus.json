@@ -22,11 +22,13 @@
   "cocktails": [
     {
       "label": "Mojito",
-      "prix": 9
+      "prix": 9,
+      "description": "Rhum, menthe, citron vert, sucre, eau gazeuse"
     },
     {
       "label": "Cosmopolitan",
-      "prix": 11
+      "prix": 11,
+      "description": "Vodka, triple sec, cranberry, citron vert"
     }
   ],
   "vin": "Château Margaux 2019 — 75€ la bouteille de 2 litres"

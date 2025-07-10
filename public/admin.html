@@ -111,7 +111,7 @@
       <div class="menu-section" data-section="cocktails">
         <h2>Cocktails</h2>
         <table>
-          <thead><tr><th>Label</th><th>Prix (€)</th><th>Actions</th></tr></thead>
+          <thead><tr><th>Label</th><th>Prix (€)</th><th>Description</th><th>Actions</th></tr></thead>
           <tbody></tbody>
         </table>
         <button type="button" class="add-btn">Ajouter un cocktail</button>
@@ -128,13 +128,22 @@
   <div id="toast" style="position:fixed;right:2rem;bottom:2rem;z-index:1000;min-width:200px;max-width:350px;padding:1rem 1.5rem;border-radius:0.5rem;background:#2E2E2E;color:#fff;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,0.15);display:none;align-items:center;gap:0.5rem;"></div>
   <script>
     // Utilitaires DOM
-    function createRow(item = {label:'', prix:''}, removable = true) {
+    function createRow(item = {label:'', prix:'', description:''}, removable = true, sectionName = '') {
       const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td><input type="text" value="${item.label || ''}" required></td>
-        <td><input type="number" min="0" step="0.01" value="${item.prix || ''}" required></td>
-        <td class="actions"></td>
-      `;
+      if(sectionName === 'cocktails') {
+        tr.innerHTML = `
+          <td><input type="text" value="${item.label || ''}" required></td>
+          <td><input type="number" min="0" step="0.01" value="${item.prix || ''}" required></td>
+          <td><input type="text" value="${item.description || ''}" placeholder="Description" /></td>
+          <td class="actions"></td>
+        `;
+      } else {
+        tr.innerHTML = `
+          <td><input type="text" value="${item.label || ''}" required></td>
+          <td><input type="number" min="0" step="0.01" value="${item.prix || ''}" required></td>
+          <td class="actions"></td>
+        `;
+      }
       if(removable) {
         const delBtn = document.createElement('button');
         delBtn.type = 'button';
@@ -149,8 +158,9 @@
     function fillSection(section, items) {
       const tbody = section.querySelector('tbody');
       tbody.innerHTML = '';
+      const sectionName = section.dataset.section;
       items.forEach(item => {
-        tbody.appendChild(createRow(item));
+        tbody.appendChild(createRow(item, true, sectionName));
       });
     }
 
@@ -197,8 +207,19 @@
           }
         } else {
           const items = Array.from(section.querySelectorAll('tbody tr')).map(tr => {
-            const [labelInput, prixInput] = tr.querySelectorAll('input');
-            return { label: labelInput.value.trim(), prix: Number(prixInput.value) };
+            const inputs = tr.querySelectorAll('input');
+            if(name === 'cocktails') {
+              return {
+                label: inputs[0].value.trim(),
+                prix: Number(inputs[1].value),
+                description: inputs[2].value.trim()
+              };
+            } else {
+              return {
+                label: inputs[0].value.trim(),
+                prix: Number(inputs[1].value)
+              };
+            }
           }).filter(item => item.label && !isNaN(item.prix));
           try {
             const res = await fetch(`/api/menus/${name}`, {

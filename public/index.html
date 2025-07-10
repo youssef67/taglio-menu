@@ -27,7 +27,8 @@
       padding: 1.5rem 0;
     }
     .logo-header {
-      height: 80px;
+      height: 180px;
+      width: 180px;
     }
     nav.tabs {
       display: flex;
@@ -152,7 +153,11 @@
         items.forEach(item => {
           const card = document.createElement('div');
           card.className = 'item-card';
-          card.innerHTML = `<h3>${item.label}</h3><p>${item.prix}€</p>`;
+          if(sectionId === 'cocktails' && item.description) {
+            card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3><div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${item.prix}€</p>`;
+          } else {
+            card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${item.prix}€</p>`;
+          }
           grid.appendChild(card);
         });
       }
