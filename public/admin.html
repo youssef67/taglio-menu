@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Modifier les menus</title>
+  <title>Admin - Modifier la phrase vin du moment</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@
       padding: 0;
     }
     .container {
-      max-width: 900px;
+      max-width: 700px;
       margin: 2rem auto;
       background: #fff;
       border-radius: 0.5rem;
@@ -23,60 +23,34 @@
       text-align: center;
       color: #8B0000;
     }
-    .menu-section {
-      margin-bottom: 2.5rem;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 2rem;
-    }
-    .menu-section:last-child {
-      border-bottom: none;
-    }
-    h2 {
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
       color: #2E2E2E;
-      margin-top: 0;
     }
-    table {
+    input[type="text"] {
       width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 1rem;
-    }
-    th, td {
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    th {
-      background: #f5f5f5;
-    }
-    input[type="text"], input[type="number"] {
-      width: 90%;
-      padding: 0.3rem;
+      padding: 0.7rem;
       border: 1px solid #ccc;
       border-radius: 0.25rem;
-    }
-    .actions {
-      display: flex;
-      gap: 0.5rem;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
     }
     button {
       background: #8B0000;
       color: #fff;
       border: none;
       border-radius: 0.25rem;
-      padding: 0.4rem 1rem;
+      padding: 0.7rem 2rem;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      display: block;
+      margin: 0 auto;
       transition: background 0.2s;
     }
     button:hover {
       background: #a83232;
-    }
-    .add-btn {
-      background: #2E2E2E;
-      margin-top: 0.5rem;
-    }
-    .add-btn:hover {
-      background: #444;
     }
     .success, .error {
       text-align: center;
@@ -89,171 +63,47 @@
 </head>
 <body>
   <div class="container">
-    <h1>Panel Admin - Modifier les menus</h1>
+    <h1>Modifier la phrase vin du moment</h1>
     <div id="message"></div>
-    <form id="menusForm">
-      <div class="menu-section" data-section="midi">
-        <h2>Menu du midi</h2>
-        <table>
-          <thead><tr><th>Label</th><th>Prix (€)</th><th>Actions</th></tr></thead>
-          <tbody></tbody>
-        </table>
-        <button type="button" class="add-btn">Ajouter un plat</button>
-      </div>
-      <div class="menu-section" data-section="boissons">
-        <h2>Boissons</h2>
-        <table>
-          <thead><tr><th>Label</th><th>Prix (€)</th><th>Actions</th></tr></thead>
-          <tbody></tbody>
-        </table>
-        <button type="button" class="add-btn">Ajouter une boisson</button>
-      </div>
-      <div class="menu-section" data-section="cocktails">
-        <h2>Cocktails</h2>
-        <table>
-          <thead><tr><th>Label</th><th>Prix (€)</th><th>Description</th><th>Actions</th></tr></thead>
-          <tbody></tbody>
-        </table>
-        <button type="button" class="add-btn">Ajouter un cocktail</button>
-      </div>
-      <div class="menu-section" data-section="vin" style="border-bottom:none;">
-        <h2>Vin du moment</h2>
-        <input type="text" id="vinInput" placeholder="Nom du vin et prix" style="width:100%;padding:0.5rem;font-size:1.1rem;" required />
-      </div>
-      <div style="text-align:center;">
-        <button type="submit" style="background:#2E2E2E;">Enregistrer toutes les modifications</button>
-      </div>
+    <form id="vinMomentForm">
+      <label for="vinMomentInput">Phrase à afficher :</label>
+      <input type="text" id="vinMomentInput" required />
+      <button type="submit">Enregistrer</button>
     </form>
   </div>
-  <div id="toast" style="position:fixed;right:2rem;bottom:2rem;z-index:1000;min-width:200px;max-width:350px;padding:1rem 1.5rem;border-radius:0.5rem;background:#2E2E2E;color:#fff;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,0.15);display:none;align-items:center;gap:0.5rem;"></div>
   <script>
-    // Utilitaires DOM
-    function createRow(item = {label:'', prix:'', description:''}, removable = true, sectionName = '') {
-      const tr = document.createElement('tr');
-      if(sectionName === 'cocktails') {
-        tr.innerHTML = `
-          <td><input type="text" value="${item.label || ''}" required></td>
-          <td><input type="number" min="0" step="0.01" value="${item.prix || ''}" required></td>
-          <td><input type="text" value="${item.description || ''}" placeholder="Description" /></td>
-          <td class="actions"></td>
-        `;
-      } else {
-        tr.innerHTML = `
-          <td><input type="text" value="${item.label || ''}" required></td>
-          <td><input type="number" min="0" step="0.01" value="${item.prix || ''}" required></td>
-          <td class="actions"></td>
-        `;
-      }
-      if(removable) {
-        const delBtn = document.createElement('button');
-        delBtn.type = 'button';
-        delBtn.textContent = 'Supprimer';
-        delBtn.onclick = () => tr.remove();
-        tr.querySelector('.actions').appendChild(delBtn);
-      }
-      return tr;
-    }
-
-    // Remplit les tableaux avec les données
-    function fillSection(section, items) {
-      const tbody = section.querySelector('tbody');
-      tbody.innerHTML = '';
-      const sectionName = section.dataset.section;
-      items.forEach(item => {
-        tbody.appendChild(createRow(item, true, sectionName));
-      });
-    }
-
-    // Charge les menus existants
+    // Charger la phrase actuelle
     fetch('/api/menus')
       .then(res => res.json())
       .then(data => {
-        document.querySelectorAll('.menu-section').forEach(section => {
-          const name = section.dataset.section;
-          if(name === 'vin') {
-            document.getElementById('vinInput').value = data.vin || '';
-          } else {
-            fillSection(section, data[name] || []);
-          }
-        });
+        document.getElementById('vinMomentInput').value = data.vin_moment || '';
       });
 
-    // Ajout d'un nouvel item
-    document.querySelectorAll('.add-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const section = btn.closest('.menu-section');
-        section.querySelector('tbody').appendChild(createRow());
-      });
-    });
-
-    // Sauvegarde des modifications
-    document.getElementById('menusForm').addEventListener('submit', async function(e) {
+    // Sauvegarder la phrase
+    document.getElementById('vinMomentForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+      const phrase = document.getElementById('vinMomentInput').value.trim();
       let hasError = false;
-      for(const section of document.querySelectorAll('.menu-section')) {
-        const name = section.dataset.section;
-        if(name === 'vin') {
-          // Sauvegarde du vin du moment
-          const vinValue = document.getElementById('vinInput').value.trim();
-          try {
-            const res = await fetch(`/api/menus/vin`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ vin: vinValue })
-            });
-            if(!res.ok) throw new Error();
-          } catch {
-            hasError = true;
-          }
-        } else {
-          const items = Array.from(section.querySelectorAll('tbody tr')).map(tr => {
-            const inputs = tr.querySelectorAll('input');
-            if(name === 'cocktails') {
-              return {
-                label: inputs[0].value.trim(),
-                prix: Number(inputs[1].value),
-                description: inputs[2].value.trim()
-              };
-            } else {
-              return {
-                label: inputs[0].value.trim(),
-                prix: Number(inputs[1].value)
-              };
-            }
-          }).filter(item => item.label && !isNaN(item.prix));
-          try {
-            const res = await fetch(`/api/menus/${name}`, {
-              method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(items)
-            });
-            if(!res.ok) throw new Error();
-          } catch {
-            hasError = true;
-          }
-        }
+      try {
+        const res = await fetch(`/api/menus/vin_moment`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ vin_moment: phrase })
+        });
+        if(!res.ok) throw new Error();
+      } catch {
+        hasError = true;
       }
       const msg = document.getElementById('message');
       if(hasError) {
         msg.textContent = 'Erreur lors de la sauvegarde.';
         msg.className = 'error';
-        showToast('Erreur lors de la sauvegarde.', false);
       } else {
-        msg.textContent = 'Modifications enregistrées !';
+        msg.textContent = 'Phrase enregistrée !';
         msg.className = 'success';
-        showToast('Modifications enregistrées !', true);
       }
       setTimeout(() => { msg.textContent = ''; msg.className = ''; }, 2500);
     });
-
-    // Fonction pour afficher un toast
-    function showToast(msg, success = true) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.style.background = success ? '#2e7d32' : '#b71c1c';
-      toast.style.display = 'flex';
-      setTimeout(() => { toast.style.display = 'none'; }, 2500);
-    }
   </script>
 </body>
 </html> 

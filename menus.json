@@ -9,16 +9,16 @@
       "prix": 18
     }
   ],
-  "boissons": [
-    {
-      "label": "Cassandre ma pute",
-      "prix": 3
-    },
-    {
-      "label": "doner kebab",
-      "prix": 4
-    }
-  ],
+  "boissons": {
+    "bieres": [
+      { "label": "Heineken", "prix": 5 },
+      { "label": "Leffe", "prix": 6 }
+    ],
+    "softs": [
+      { "label": "Eau plate", "prix": 3 },
+      { "label": "Soda", "prix": 4 }
+    ]
+  },
   "cocktails": [
     {
       "label": "Mojito",
@@ -31,5 +31,5 @@
       "description": "Vodka, triple sec, cranberry, citron vert"
     }
   ],
-  "vin": "Château Margaux 2019 — 75€ la bouteille de 2 litres"
+  "vin_moment": "Découvrez nos vins du moment de la sélection Marmi."
 }

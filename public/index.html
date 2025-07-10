@@ -24,7 +24,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1.5rem 0;
+      padding: 0.2rem 0 0.2rem 0;
     }
     .logo-header {
       height: 180px;
@@ -34,7 +34,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 1rem;
+      padding: 0.2rem 0 0.2rem 0;
       background-color: var(--anthracite-color);
     }
     .tab-link {
@@ -94,20 +94,60 @@
       margin: 0;
     }
     .vin-du-moment {
-      background-color: #fff;
-      border-top: 4px solid var(--primary-color);
-      padding: 2rem;
-      margin: 2rem auto;
-      max-width: 800px;
+      background: #f8f8f8;
+      border: 2.5px solid var(--primary-color);
+      border-radius: 1.2em;
+      box-shadow: 0 2px 12px rgba(139,0,0,0.07);
+      padding: 2.2rem 2rem 1.5rem 2rem;
+      margin: 2.5rem 2vw 1.5rem 2vw;
+      max-width: 700px;
       text-align: center;
+      position: relative;
     }
-    .vin-du-moment h2 {
+    #vin-moment {
+      color: #222;
+      font-size: 1.25em;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 0.5px;
+      margin: 0.1em 0 0.1em 0;
+    }
+    .vin-du-moment-title {
       margin-top: 0;
       color: var(--primary-color);
+      font-size: 2em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+    }
+    .vin-du-moment p {
+      font-size: 1.25em;
+      color: var(--primary-color);
+      margin: 1.2em 0 0 0;
+      font-weight: 500;
+      letter-spacing: 0.5px;
     }
     .tab-content h2,
     .vin-du-moment h2 {
       text-align: center;
+    }
+    /* Ajout d'une règle pour les titres de section si jamais ils sont réintroduits */
+    .tab-content h2 {
+      margin-top: 20px;
+    }
+    .boissons-title {
+      color: var(--primary-color);
+      font-size: 1.5em;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 0.7em;
+      margin-top: 1.5em;
+      border-bottom: 2px solid var(--primary-color);
+      display: inline-block;
+      padding-bottom: 0.15em;
     }
   </style>
 </head>
@@ -124,13 +164,22 @@
     <div class="items-grid"></div>
   </section>
   <section id="boissons" class="tab-content">
-    <div class="items-grid"></div>
+    <div>
+      <div class="boissons-title">Bières</div>
+      <div class="items-grid" id="bieres-grid"></div>
+      <div class="boissons-title" style="margin-top:2em;">Softs</div>
+      <div class="items-grid" id="softs-grid"></div>
+    </div>
   </section>
   <section id="cocktails" class="tab-content">
     <div class="items-grid"></div>
   </section>
   <div class="vin-du-moment">
-    <p id="vin-moment"></p>
+    <div id="vin-moment"></div>
+  </div>
+  <div style="margin:2em auto 40px auto;text-align:center;font-size:0.95em;color:#222;opacity:0.8;max-width:800px;">
+    L'abus de l'alcool est dangereux pour la santé.<br/>
+    A consommer avec modération.
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -168,11 +217,27 @@
         .then(res => res.json())
         .then(data => {
           renderItems('midi', data.midi);
-          renderItems('boissons', data.boissons);
+          // Boissons : bières et softs
+          const bieresGrid = document.getElementById('bieres-grid');
+          const softsGrid = document.getElementById('softs-grid');
+          bieresGrid.innerHTML = '';
+          softsGrid.innerHTML = '';
+          (data.boissons?.bieres || []).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${item.prix}€</p>`;
+            bieresGrid.appendChild(card);
+          });
+          (data.boissons?.softs || []).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${item.prix}€</p>`;
+            softsGrid.appendChild(card);
+          });
           renderItems('cocktails', data.cocktails);
-          // Affichage dynamique du vin du moment
+          // Affichage dynamique de la phrase vin du moment
           const vinDiv = document.getElementById('vin-moment');
-          vinDiv.textContent = data.vin || '';
+          vinDiv.textContent = data.vin_moment || '';
         })
         .catch(err => {
           console.error('Erreur lors du chargement des menus:', err);
