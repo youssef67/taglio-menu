@@ -81,7 +81,8 @@
       border: 1px solid #ddd;
       border-radius: 0.5rem;
       padding: 1rem;
-      width: calc(50% - 2rem);
+      width: calc(100% - 2rem);
+      max-width: 600px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
@@ -104,6 +105,10 @@
       margin-top: 0;
       color: var(--primary-color);
     }
+    .tab-content h2,
+    .vin-du-moment h2 {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -116,19 +121,15 @@
     <button class="tab-link" data-tab="cocktails">Cocktails</button>
   </nav>
   <section id="midi" class="tab-content active">
-    <h2>Menu du midi</h2>
     <div class="items-grid"></div>
   </section>
   <section id="boissons" class="tab-content">
-    <h2>Boissons</h2>
     <div class="items-grid"></div>
   </section>
   <section id="cocktails" class="tab-content">
-    <h2>Cocktails</h2>
     <div class="items-grid"></div>
   </section>
   <div class="vin-du-moment">
-    <h2>Vin du moment</h2>
     <p id="vin-moment"></p>
   </div>
   <script>
