@@ -35,17 +35,31 @@
       }
     ]
   },
-  "cocktails": [
-    {
-      "label": "Mojito",
-      "prix": 97,
-      "description": "Rhum, menthe, citron vert, sucre, eau gazeuse"
-    },
-    {
-      "label": "Cosmopolitan",
-      "prix": 111,
-      "description": "Vodka, triple sec, cranberry, citron vert"
-    }
-  ],
+  "cocktails": {
+    "cocktails": [
+      {
+        "label": "Mojito",
+        "prix": 9,
+        "description": "Rhum, menthe, citron vert, sucre, eau gazeuse"
+      },
+      {
+        "label": "Cosmopolitan",
+        "prix": 11,
+        "description": "Vodka, triple sec, cranberry, citron vert"
+      }
+    ],
+    "mocktails": [
+      {
+        "label": "Virgin Mojito",
+        "prix": 7,
+        "description": "Menthe, citron vert, sucre, eau gazeuse"
+      },
+      {
+        "label": "Shirley Temple",
+        "prix": 6,
+        "description": "Gingembre, grenadine, citron, limonade"
+      }
+    ]
+  },
   "vin_moment": "Découvrez nos vins du moment de la sélection Marmi"
 }

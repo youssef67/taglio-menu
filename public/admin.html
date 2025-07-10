@@ -151,11 +151,18 @@
       </div>
       <div class="menu-section" data-section="cocktails">
         <h2>Cocktails</h2>
-        <table>
+        <h3>Cocktails</h3>
+        <table data-subsection="cocktails">
           <thead><tr><th>Label</th><th>Prix (€)</th><th>Description</th><th>Actions</th></tr></thead>
           <tbody></tbody>
         </table>
-        <button type="button" class="add-btn">Ajouter un cocktail</button>
+        <button type="button" class="add-btn" data-subsection="cocktails">Ajouter un cocktail</button>
+        <h3>Mocktails</h3>
+        <table data-subsection="mocktails">
+          <thead><tr><th>Label</th><th>Prix (€)</th><th>Description</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <button type="button" class="add-btn" data-subsection="mocktails">Ajouter un mocktail</button>
       </div>
       <div class="vin-moment-section">
         <label for="vinMomentInput">Phrase à afficher pour le vin du moment :</label>
@@ -168,7 +175,7 @@
     function createRow(item = {label:'', prix:'', description:''}, removable = true, sectionName = '', isNew = false) {
       const tr = document.createElement('tr');
       const isEmpty = !item.label && !item.prix && !item.description;
-      if(sectionName === 'cocktails' || sectionName === 'bieres' || sectionName === 'softs') {
+      if(sectionName === 'cocktails' || sectionName === 'bieres' || sectionName === 'softs' || sectionName === 'mocktails') {
         tr.innerHTML = `
           <td><input type="text" value="${item.label || ''}" required></td>
           <td><input type="number" min="0" step="0.01" value="${item.prix || ''}" required></td>
@@ -254,6 +261,9 @@
           if(name === 'boissons') {
             fillSection(section, data.boissons.bieres, 'bieres');
             fillSection(section, data.boissons.softs, 'softs');
+          } else if(name === 'cocktails') {
+            fillSection(section, data.cocktails.cocktails, 'cocktails');
+            fillSection(section, data.cocktails.mocktails, 'mocktails');
           } else if(name === 'vin') {
             document.getElementById('vinInput').value = data.vin || '';
           } else {
@@ -301,6 +311,27 @@
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ bieres, softs })
+            });
+            if(!res.ok) throw new Error();
+          } catch {
+            hasError = true;
+          }
+        } else if(name === 'cocktails') {
+          // Cocktails
+          const cocktails = Array.from(section.querySelector('table[data-subsection="cocktails"] tbody').querySelectorAll('tr')).map(tr => {
+            const inputs = tr.querySelectorAll('input');
+            return { label: inputs[0].value.trim(), prix: Number(inputs[1].value), description: inputs[2].value.trim() };
+          }).filter(item => item.label && !isNaN(item.prix));
+          // Mocktails
+          const mocktails = Array.from(section.querySelector('table[data-subsection="mocktails"] tbody').querySelectorAll('tr')).map(tr => {
+            const inputs = tr.querySelectorAll('input');
+            return { label: inputs[0].value.trim(), prix: Number(inputs[1].value), description: inputs[2].value.trim() };
+          }).filter(item => item.label && !isNaN(item.prix));
+          try {
+            const res = await fetch(`/api/menus/cocktails`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ cocktails, mocktails })
             });
             if(!res.ok) throw new Error();
           } catch {

@@ -172,7 +172,12 @@
     </div>
   </section>
   <section id="cocktails" class="tab-content">
-    <div class="items-grid"></div>
+    <div>
+      <div class="boissons-title">Cocktails</div>
+      <div class="items-grid" id="cocktails-grid"></div>
+      <div class="boissons-title" style="margin-top:2em;">Mocktails</div>
+      <div class="items-grid" id="mocktails-grid"></div>
+    </div>
   </section>
   <div class="vin-du-moment">
     <div id="vin-moment"></div>
@@ -238,7 +243,27 @@
               `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${item.prix}€</p>`;
             softsGrid.appendChild(card);
           });
-          renderItems('cocktails', data.cocktails);
+          // Cocktails : cocktails et mocktails
+          const cocktailsGrid = document.getElementById('cocktails-grid');
+          const mocktailsGrid = document.getElementById('mocktails-grid');
+          cocktailsGrid.innerHTML = '';
+          mocktailsGrid.innerHTML = '';
+          (data.cocktails?.cocktails || []).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3>` +
+              (item.description ? `<div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div>` : '') +
+              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${item.prix}€</p>`;
+            cocktailsGrid.appendChild(card);
+          });
+          (data.cocktails?.mocktails || []).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'item-card';
+            card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3>` +
+              (item.description ? `<div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div>` : '') +
+              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${item.prix}€</p>`;
+            mocktailsGrid.appendChild(card);
+          });
           // Affichage dynamique de la phrase vin du moment
           const vinDiv = document.getElementById('vin-moment');
           vinDiv.textContent = data.vin_moment || '';

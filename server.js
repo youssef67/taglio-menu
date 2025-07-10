@@ -35,6 +35,12 @@ app.put('/api/menus/:section', async (req, res) => {
     await db.write();
     return res.sendStatus(204);
   }
+  if (section === 'cocktails') {
+    const { cocktails = [], mocktails = [] } = req.body;
+    db.data.cocktails = { cocktails, mocktails };
+    await db.write();
+    return res.sendStatus(204);
+  }
   const newItems = req.body; // [{ label, prix }, ...]
   if (!db.data[section]) return res.status(404).send('Section inconnue');
   db.data[section] = newItems;
