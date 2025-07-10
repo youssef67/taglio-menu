@@ -220,12 +220,17 @@
           const card = document.createElement('div');
           card.className = 'item-card';
           if(sectionId === 'cocktails' && item.description) {
-            card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3><div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${Number(item.prix).toFixed(2)}€</p>`;
+            card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3><div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
           } else {
-            card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${Number(item.prix).toFixed(2)}€</p>`;
+            card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
           }
           grid.appendChild(card);
         });
+      }
+
+      function formatPrix(prix) {
+        const n = Number(prix);
+        return Number.isInteger(n) ? n : n.toFixed(2);
       }
 
       // Récupère les menus depuis l'API et met à jour le DOM
@@ -243,7 +248,7 @@
             card.className = 'item-card';
             card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3>` +
               (item.description ? `<div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div>` : '') +
-              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${Number(item.prix).toFixed(2)}€</p>`;
+              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
             bieresGrid.appendChild(card);
           });
           (data.boissons?.softs || []).forEach(item => {
@@ -251,7 +256,7 @@
             card.className = 'item-card';
             card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3>` +
               (item.description ? `<div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div>` : '') +
-              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${Number(item.prix).toFixed(2)}€</p>`;
+              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
             softsGrid.appendChild(card);
           });
           // Cocktails : cocktails et mocktails
@@ -264,7 +269,7 @@
             card.className = 'item-card';
             card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3>` +
               (item.description ? `<div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div>` : '') +
-              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${Number(item.prix).toFixed(2)}€</p>`;
+              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
             cocktailsGrid.appendChild(card);
           });
           (data.cocktails?.mocktails || []).forEach(item => {
@@ -272,7 +277,7 @@
             card.className = 'item-card';
             card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3>` +
               (item.description ? `<div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div>` : '') +
-              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${Number(item.prix).toFixed(2)}€</p>`;
+              `<p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
             mocktailsGrid.appendChild(card);
           });
           // Affichage dynamique de la phrase vin du moment

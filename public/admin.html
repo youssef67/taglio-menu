@@ -179,14 +179,14 @@
       if(sectionName === 'cocktails' || sectionName === 'bieres' || sectionName === 'softs' || sectionName === 'mocktails') {
         tr.innerHTML = `
           <td><input type="text" value="${item.label || ''}" required></td>
-          <td><input type="number" min="0" step="0.01" value="${(item.prix !== undefined && item.prix !== null && item.prix !== '') ? Number(item.prix).toFixed(2) : ''}" required></td>
+          <td><input type="number" min="0" step="0.01" value="${formatPrix(item.prix)}" required></td>
           <td><input type="text" value="${item.description || ''}" placeholder="Description" /></td>
           <td class="actions"></td>
         `;
       } else {
         tr.innerHTML = `
           <td><input type="text" value="${item.label || ''}" required></td>
-          <td><input type="number" min="0" step="0.01" value="${(item.prix !== undefined && item.prix !== null && item.prix !== '') ? Number(item.prix).toFixed(2) : ''}" required></td>
+          <td><input type="number" min="0" step="0.01" value="${formatPrix(item.prix)}" required></td>
           <td class="actions"></td>
         `;
       }
@@ -241,6 +241,11 @@
         });
       });
       return tr;
+    }
+
+    function formatPrix(prix) {
+      const n = Number(prix);
+      return (prix === '' || prix === undefined || prix === null) ? '' : (Number.isInteger(n) ? n : n.toFixed(2));
     }
 
     // Remplit les tableaux avec les données
