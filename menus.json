@@ -1,0 +1,33 @@
+{
+  "midi": [
+    {
+      "label": "Formule Entrée + Plat + Dessert",
+      "prix": 25
+    },
+    {
+      "label": "Plat seul sans amis",
+      "prix": 18
+    }
+  ],
+  "boissons": [
+    {
+      "label": "Cassandre ma pute",
+      "prix": 3
+    },
+    {
+      "label": "doner kebab",
+      "prix": 4
+    }
+  ],
+  "cocktails": [
+    {
+      "label": "Mojito",
+      "prix": 9
+    },
+    {
+      "label": "Cosmopolitan",
+      "prix": 11
+    }
+  ],
+  "vin": "Château Margaux 2019 — 75€ la bouteille de 2 litres"
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notre Restaurant</title>
+  <style>
+    :root {
+      --primary-color: #8B0000;
+      --secondary-color: #FFD700;
+      --text-color: #333;
+      --bg-color: #fafafa;
+      --anthracite-color: #2E2E2E;
+      --offwhite-color: #F5F5F5;
+    }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text-color);
+      background-color: var(--bg-color);
+    }
+    header {
+      background-color: var(--anthracite-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem 0;
+    }
+    .logo-header {
+      height: 80px;
+    }
+    nav.tabs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      background-color: var(--anthracite-color);
+    }
+    .tab-link {
+      flex: 1;
+      margin: 0 0.25rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--anthracite-color);
+      color: var(--offwhite-color);
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    .tab-link:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .tab-link.active {
+      background-color: var(--offwhite-color);
+      color: var(--anthracite-color);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    .tab-content {
+      display: none;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .items-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .item-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      width: calc(50% - 2rem);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .item-card h3 {
+      margin: 0 0 0.5rem;
+      color: var(--primary-color);
+    }
+    .item-card p {
+      margin: 0;
+    }
+    .vin-du-moment {
+      background-color: #fff;
+      border-top: 4px solid var(--primary-color);
+      padding: 2rem;
+      margin: 2rem auto;
+      max-width: 800px;
+      text-align: center;
+    }
+    .vin-du-moment h2 {
+      margin-top: 0;
+      color: var(--primary-color);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.svg" alt="Logo du restaurant" class="logo-header" />
+  </header>
+  <nav class="tabs">
+    <button class="tab-link active" data-tab="midi">Menu du midi</button>
+    <button class="tab-link" data-tab="boissons">Boissons</button>
+    <button class="tab-link" data-tab="cocktails">Cocktails</button>
+  </nav>
+  <section id="midi" class="tab-content active">
+    <h2>Menu du midi</h2>
+    <div class="items-grid"></div>
+  </section>
+  <section id="boissons" class="tab-content">
+    <h2>Boissons</h2>
+    <div class="items-grid"></div>
+  </section>
+  <section id="cocktails" class="tab-content">
+    <h2>Cocktails</h2>
+    <div class="items-grid"></div>
+  </section>
+  <div class="vin-du-moment">
+    <h2>Vin du moment</h2>
+    <p id="vin-moment"></p>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Gestion des onglets
+      const tabs = document.querySelectorAll('.tab-link');
+      const contents = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+          tab.classList.add('active');
+          document.getElementById(tab.dataset.tab).classList.add('active');
+        });
+      });
+
+      // Fonction pour générer le HTML des items d'une section
+      function renderItems(sectionId, items) {
+        const section = document.getElementById(sectionId);
+        const grid = section.querySelector('.items-grid');
+        grid.innerHTML = '';
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'item-card';
+          card.innerHTML = `<h3>${item.label}</h3><p>${item.prix}€</p>`;
+          grid.appendChild(card);
+        });
+      }
+
+      // Récupère les menus depuis l'API et met à jour le DOM
+      fetch('/api/menus')
+        .then(res => res.json())
+        .then(data => {
+          renderItems('midi', data.midi);
+          renderItems('boissons', data.boissons);
+          renderItems('cocktails', data.cocktails);
+          // Affichage dynamique du vin du moment
+          const vinDiv = document.getElementById('vin-moment');
+          vinDiv.textContent = data.vin || '';
+        })
+        .catch(err => {
+          console.error('Erreur lors du chargement des menus:', err);
+        });
+    });
+  </script>
+</body>
+</html>
