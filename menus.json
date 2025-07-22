@@ -1,106 +1,119 @@
 {
   "midi": [
     {
-      "label": "Formule Entrée + Plat + Dessert ff",
-      "prix": 25
+      "label": "Gnocchis",
+      "prix": 14
     },
     {
-      "label": "Plat seul sans amisksk",
-      "prix": 18
+      "label": "Prosciutto crudo i Melone",
+      "prix": 14
+    },
+    {
+      "label": "Tomates farcies",
+      "prix": 14
+    },
+    {
+      "label": "Café gourmand",
+      "prix": 10
     }
   ],
   "boissons": {
     "bieres": [
       {
-        "label": "Brulo",
-        "prix": 4.9,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Cynar 25cl",
-        "prix": 4.5,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Cynar 50cl",
-        "prix": 9,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Kolla 25cl",
-        "prix": 4,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Kolla 50cl",
-        "prix": 7.8,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Ombre 25cl",
-        "prix": 4.5,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Ombre 50cl",
-        "prix": 8.5,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Rothaus",
-        "prix": 4.5,
-        "description": "description à mettre"
-      },
-      {
-        "label": "Helles 25cl",
+        "label": "Ça Va Couper 25cL",
         "prix": 3.5,
-        "description": "description à mettre"
+        "description": "Blonde Helles 5%"
       },
       {
-        "label": "Helles 50cl",
+        "label": "Ça Va Couper 50cL",
         "prix": 6.9,
-        "description": "description à mettre"
+        "description": "Blonde Helles 5%"
+      },
+      {
+        "label": "À l’Ombre des Pensées 25cL",
+        "prix": 4.5,
+        "description": "Blanche IPA 5%"
+      },
+      {
+        "label": "À l’Ombre des Pensées 50cL",
+        "prix": 8.5,
+        "description": "Blanche IPA 5%"
+      },
+      {
+        "label": "Cynar 25cL",
+        "prix": 4.5,
+        "description": "Amer à base d’artichaut"
+      },
+      {
+        "label": "Cynar 50cL",
+        "prix": 9,
+        "description": "Amer à base d’artichaut"
+      },
+      {
+        "label": "Brulo 0%",
+        "prix": 4.9,
+        "description": "IPA / Gose fruitée"
+      },
+      {
+        "label": "Rothaus 33cL",
+        "prix": 4.5,
+        "description": "Tannen Zäpfle 5,1%"
       }
     ],
     "softs": [
       {
-        "label": "Gugini Caruso",
+        "label": "Cugini Caruso 33cL",
         "prix": 4.5,
-        "description": ""
+        "description": "Mandarine / Orange / Citron / Limonade / Cola / Spuma / Limonade / Ginger beer (20cL)"
       },
       {
-        "label": "Ice Tea Sauter",
+        "label": "Ice Tea Sauter 33cL",
         "prix": 3.8,
         "description": ""
       },
       {
-        "label": "Carola Bleu",
+        "label": "Carola Bleu 50cL",
         "prix": 3,
         "description": ""
       },
       {
-        "label": "Carola verte / rouge",
+        "label": "Carola verte / rouge 50cL",
         "prix": 3.2,
         "description": ""
       },
       {
-        "label": "Polara",
+        "label": "Polara chinotto 33cL",
         "prix": 4,
         "description": ""
       },
       {
-        "label": "Portofino",
+        "label": "Portofino Mandarinata 25cL",
         "prix": 5,
         "description": ""
       },
       {
-        "label": "Ice Tea Maison",
-        "prix": 4,
+        "label": "Fritz 33cL",
+        "prix": 3.6,
+        "description": "Citron / Kola"
+      },
+      {
+        "label": "Club mate 50cL",
+        "prix": 4.6,
         "description": ""
       },
       {
-        "label": "Club mate",
-        "prix": 4.6,
+        "label": "Jus de fruits Sauter 25cL",
+        "prix": 3.8,
+        "description": "Pomme / Orange / Tomate"
+      },
+      {
+        "label": "Coca Cola 33cL",
+        "prix": 3.6,
+        "description": ""
+      },
+      {
+        "label": "Coca Cola Zéro 33cL",
+        "prix": 3.6,
         "description": ""
       }
     ]
@@ -156,6 +169,11 @@
         "label": "Piselli e Gragola",
         "prix": 9,
         "description": "Sirop fraises fraîches / vodka petits pois"
+      },
+      {
+        "label": "Bellini Bergamotte",
+        "prix": 9,
+        "description": "Pur jus de Bergamotte / Prosecco"
       }
     ],
     "mocktails": [

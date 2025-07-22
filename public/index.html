@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,15 +15,19 @@
       --anthracite-color: #2E2E2E;
       --offwhite-color: #F5F5F5;
     }
-    html, body {
+
+    html,
+    body {
       background: #fafafa !important;
     }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       color: var(--text-color);
       background-color: var(--bg-color);
     }
+
     header {
       background-color: var(--anthracite-color);
       display: flex;
@@ -30,10 +35,12 @@
       align-items: center;
       padding: 0.2rem 0 0.2rem 0;
     }
+
     .logo-header {
       height: 180px;
       width: 180px;
     }
+
     nav.tabs {
       display: flex;
       justify-content: center;
@@ -41,6 +48,7 @@
       padding: 0.2rem 0 0.2rem 0;
       background-color: var(--anthracite-color);
     }
+
     .tab-link {
       flex: 1;
       margin: 0 0.25rem;
@@ -57,29 +65,35 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
       transition: background 0.3s, color 0.3s, box-shadow 0.3s;
     }
+
     .tab-link:hover {
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     }
+
     .tab-link.active {
       background-color: var(--offwhite-color);
       color: var(--anthracite-color);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
+
     .tab-content {
       display: none;
       padding: 2rem;
       max-width: 800px;
       margin: auto;
     }
+
     .tab-content.active {
       display: block;
     }
+
     .items-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
     }
+
     .item-card {
       background-color: #fff;
       border: 1px solid #ddd;
@@ -90,18 +104,21 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       text-align: center;
     }
+
     .item-card h3 {
       margin: 0 0 0.5rem;
       color: var(--primary-color);
     }
+
     .item-card p {
       margin: 0;
     }
+
     .vin-du-moment {
       background: #f8f8f8;
       border: 2.5px solid var(--primary-color);
       border-radius: 1.2em;
-      box-shadow: 0 2px 12px rgba(139,0,0,0.07);
+      box-shadow: 0 2px 12px rgba(139, 0, 0, 0.07);
       padding: 2.2rem 2rem 1.5rem 2rem;
       margin: 2.5rem auto 1.5rem auto;
       max-width: 700px;
@@ -109,12 +126,14 @@
       position: relative;
       display: block;
     }
+
     @media (max-width: 600px) {
       .vin-du-moment {
         margin-left: 5vw;
         margin-right: 5vw;
       }
     }
+
     #vin-moment {
       color: #222;
       font-size: 1.25em;
@@ -123,6 +142,7 @@
       letter-spacing: 0.5px;
       margin: 0.1em 0 0.1em 0;
     }
+
     .vin-du-moment-title {
       margin-top: 0;
       color: var(--primary-color);
@@ -134,6 +154,7 @@
       justify-content: center;
       gap: 0.5em;
     }
+
     .vin-du-moment p {
       font-size: 1.25em;
       color: var(--primary-color);
@@ -141,14 +162,17 @@
       font-weight: 500;
       letter-spacing: 0.5px;
     }
+
     .tab-content h2,
     .vin-du-moment h2 {
       text-align: center;
     }
+
     /* Ajout d'une règle pour les titres de section si jamais ils sont réintroduits */
     .tab-content h2 {
       margin-top: 20px;
     }
+
     .boissons-title {
       color: var(--primary-color);
       font-size: 1.5em;
@@ -160,12 +184,29 @@
       display: inline-block;
       padding-bottom: 0.15em;
     }
+
+    .hero-header {                     /* ou header si tu préfères */
+  /* 1 — image 2× (exporte-la au moins en 2400 × 600 px par ex.) */
+  background-image: url('img_banniere.png');
+
+  /* 2 — on la répète partout pour couvrir sans bande */
+  background-repeat: repeat;
+
+  /* 3 — on contrôle le « zoom » avec background-size :
+        – 12vw = 12 % de la largeur viewport (grand écran)
+        – clamp limite entre 140 px et 240 px pour éviter l’extrême */
+  --pattern-size: clamp(600px, 12vw, 240px);
+  background-size: var(--pattern-size) auto;
+
+  /* 4 — reste du style */
+  background-position: center top;
+  height: 220px;                  /* ajuste la hauteur comme tu veux */
+}
   </style>
 </head>
+
 <body>
-  <header>
-    <img src="logo.svg" alt="Logo du restaurant" class="logo-header" />
-  </header>
+  <header class="hero-header"></header>
   <nav class="tabs">
     <button class="tab-link active" data-tab="midi">Menu du midi</button>
     <button class="tab-link" data-tab="boissons">Boissons</button>
@@ -194,7 +235,7 @@
     <div id="vin-moment"></div>
   </div>
   <div style="margin:2em auto 40px auto;text-align:center;font-size:0.95em;color:#222;opacity:0.8;max-width:800px;">
-    L'abus de l'alcool est dangereux pour la santé<br/>
+    L'abus de l'alcool est dangereux pour la santé<br />
     à consommer avec modération
   </div>
   <script>
@@ -219,7 +260,7 @@
         items.forEach(item => {
           const card = document.createElement('div');
           card.className = 'item-card';
-          if(sectionId === 'cocktails' && item.description) {
+          if (sectionId === 'cocktails' && item.description) {
             card.innerHTML = `<h3 style='color:#8B0000;'>${item.label}</h3><div style='font-size:0.95em;color:#555;margin-bottom:0.7em;'>${item.description}</div><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
           } else {
             card.innerHTML = `<h3 style='color:#222;'>${item.label}</h3><p style='margin-top:1em;font-size:1.3em;font-weight:bold;color:#8B0000;letter-spacing:0.5px;'>${formatPrix(item.prix)}€</p>`;
@@ -290,4 +331,5 @@
     });
   </script>
 </body>
+
 </html>
